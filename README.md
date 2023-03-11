@@ -10,4 +10,4 @@ This is my project was codded by Vlad K., for Phase #3 Ruby at Flatiron School.
 
 ## Project description
 
-This
+This project is simple To-Do List app
