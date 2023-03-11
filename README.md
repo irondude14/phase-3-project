@@ -10,4 +10,4 @@ This is my project was codded by Vlad K., for Phase #3 Ruby at Flatiron School.
 
 ## Project description
 
-This project is simple To-Do List app
+This project is a simple To-Do List app. That will allow us to track our progress for simple tasks.
