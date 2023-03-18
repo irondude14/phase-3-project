@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className='App'>
-      <List />
+      <List tasks={tasks} steps={steps} />
     </div>
   );
 }
