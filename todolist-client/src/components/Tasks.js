@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Task({ tasks, onHandleSelect }) {
+export default function Tasks({ tasks, setTaskID }) {
   const taskList = tasks.map((task) => (
     <option key={task.id} value={task.id}>
       {task.name}
@@ -10,7 +10,7 @@ export default function Task({ tasks, onHandleSelect }) {
   return (
     <div>
       <label>Tasks:</label>
-      <select onChange={(event) => onHandleSelect(event.target.value)}>
+      <select onChange={(e) => setTaskID(parseInt(e.target.value))}>
         {taskList}
       </select>
     </div>

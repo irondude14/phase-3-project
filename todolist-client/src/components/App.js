@@ -1,40 +1,38 @@
 import React from 'react';
-import List from './List';
+import Tasks from './Tasks';
+import Steps from './Steps';
 import { useEffect, useState } from 'react';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [steps, setSteps] = useState([]);
-  const [taskId, setTaskId] = useState(1);
+  const [taskID, setTaskID] = useState(1);
   const [filteredSteps, setFilteredSteps] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:9292/tasks')
       .then((r) => r.json())
-      .then((data) => setTasks(data));
+      .then((tasks) => setTasks(tasks));
   }, []);
 
   useEffect(() => {
     fetch('http://localhost:9292/steps')
       .then((r) => r.json())
-      .then((data) => setSteps(data));
+      .then((steps) => setSteps(steps));
   }, []);
 
-  function handleSelect(id) {
-    setTaskId(id);
-  }
-
   useEffect(() => {
-    let filteredSteps = steps.filter((step) => step.task_id === taskId);
+    const filteredSteps = steps.filter((step) => step.task_id === taskID);
     setFilteredSteps(filteredSteps);
-  }, [steps, taskId]);
+  }, [taskID, steps]);
 
-  console.log(taskId);
+  console.log(taskID);
   console.log(filteredSteps);
 
   return (
     <div>
-      <List tasks={tasks} steps={filteredSteps} onHandleSelect={handleSelect} />
+      <Tasks tasks={tasks} setTaskID={setTaskID} />
+      <Steps filteredSteps={filteredSteps} />
     </div>
   );
 }
