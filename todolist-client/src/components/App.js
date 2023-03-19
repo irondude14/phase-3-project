@@ -41,12 +41,27 @@ function App() {
     setSteps(updatedSteps);
   }
 
+  function handleUpdateStep(updatedStep) {
+    const updatedSteps = steps.map((step) => {
+      if (step.id === updatedStep.id) {
+        return updatedStep;
+      } else {
+        return step;
+      }
+    });
+    setSteps(updatedSteps);
+  }
+
   return (
     <div>
       <Tasks tasks={tasks} setTaskID={setTaskID} />
       {filteredSteps.map((step) => (
         <ul key={step.id}>
-          <Step step={step} onDeleteStep={handleDeleteStep} />
+          <Step
+            step={step}
+            onDeleteStep={handleDeleteStep}
+            onUpdateStep={handleUpdateStep}
+          />
         </ul>
       ))}
       <TaskForm onAddTask={handleAddTask} />

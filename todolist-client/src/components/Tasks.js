@@ -13,6 +13,7 @@ export default function Tasks({ tasks, setTaskID }) {
       <select onChange={(e) => setTaskID(parseInt(e.target.value))}>
         {taskList}
       </select>
+      <button>🗑️</button>
     </div>
   );
 }
