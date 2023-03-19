@@ -26,9 +26,6 @@ function App() {
     setFilteredSteps(filteredSteps);
   }, [taskID, steps]);
 
-  console.log(taskID);
-  console.log(filteredSteps);
-
   return (
     <div>
       <Tasks tasks={tasks} setTaskID={setTaskID} />

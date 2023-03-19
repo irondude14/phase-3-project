@@ -6,7 +6,12 @@ export default function Steps({ filteredSteps }) {
     <div>
       <ul>
         {filteredSteps.map((step) => (
-          <li key={step.id}>{step.name}</li>
+          <li key={step.id}>
+            <>{step.name}</>
+            <button>Done</button>
+            <button>Edit</button>
+            <button>Delete</button>
+          </li>
         ))}
       </ul>
       <StepForm />
