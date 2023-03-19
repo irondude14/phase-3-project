@@ -2,6 +2,7 @@ import React from 'react';
 import Tasks from './Tasks';
 import Step from './Step';
 import StepForm from './StepFrom';
+import TaskForm from './TaskFrom';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -31,6 +32,10 @@ function App() {
     setSteps([...steps, newStep]);
   }
 
+  function handleAddTask(newTask) {
+    setTasks([...tasks, newTask]);
+  }
+
   function handleDeleteStep(id) {
     const updatedSteps = steps.filter((step) => step.id !== id);
     setSteps(updatedSteps);
@@ -44,6 +49,7 @@ function App() {
           <Step step={step} onDeleteStep={handleDeleteStep} />
         </ul>
       ))}
+      <TaskForm onAddTask={handleAddTask} />
       <StepForm taskID={taskID} onAddStep={handleAddStep} />
     </div>
   );
