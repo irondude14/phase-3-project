@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Steps({ step, onDeleteStep }) {
+export default function Step({ step, onDeleteStep }) {
   function handleDeleteBtn() {
     fetch(`http://localhost:9292/steps/` + step.id, {
       method: 'DELETE',

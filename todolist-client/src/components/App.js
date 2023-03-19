@@ -1,6 +1,6 @@
 import React from 'react';
 import Tasks from './Tasks';
-import Steps from './Steps';
+import Step from './Step';
 import StepForm from './StepFrom';
 import { useEffect, useState } from 'react';
 
@@ -41,10 +41,9 @@ function App() {
       <Tasks tasks={tasks} setTaskID={setTaskID} />
       {filteredSteps.map((step) => (
         <ul key={step.id}>
-          <Steps step={step} onDeleteStep={handleDeleteStep} />
+          <Step step={step} onDeleteStep={handleDeleteStep} />
         </ul>
       ))}
-
       <StepForm taskID={taskID} onAddStep={handleAddStep} />
     </div>
   );
