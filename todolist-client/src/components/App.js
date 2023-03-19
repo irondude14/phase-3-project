@@ -1,6 +1,7 @@
 import React from 'react';
 import Tasks from './Tasks';
 import Steps from './Steps';
+import StepForm from './StepFrom';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -26,10 +27,15 @@ function App() {
     setFilteredSteps(filteredSteps);
   }, [taskID, steps]);
 
+  function handleAddStep(newStep) {
+    setSteps([...steps, newStep]);
+  }
+
   return (
     <div>
       <Tasks tasks={tasks} setTaskID={setTaskID} />
       <Steps filteredSteps={filteredSteps} />
+      <StepForm taskID={taskID} onAddStep={handleAddStep} />
     </div>
   );
 }

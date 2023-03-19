@@ -1,5 +1,4 @@
 import React from 'react';
-import StepForm from './StepFrom';
 
 export default function Steps({ filteredSteps }) {
   return (
@@ -14,7 +13,6 @@ export default function Steps({ filteredSteps }) {
           </li>
         ))}
       </ul>
-      <StepForm />
     </div>
   );
 }

@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/steps' do
-    step = Step.create(name: params[:name])
+    step = Step.create(name: params[:name], done: params[:done], task_id: params[:task_id])
     step.to_json
   end
 
