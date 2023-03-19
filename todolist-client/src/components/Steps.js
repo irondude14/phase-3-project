@@ -1,18 +1,25 @@
 import React from 'react';
 
-export default function Steps({ filteredSteps }) {
+export default function Steps({ step, onDeleteStep }) {
+  function handleDeleteBtn() {
+    fetch(`http://localhost:9292/steps/` + step.id, {
+      method: 'DELETE',
+    });
+    onDeleteStep(step.id);
+  }
+
   return (
     <div>
-      <ul>
-        {filteredSteps.map((step) => (
-          <li key={step.id}>
-            <>{step.name}</>
-            <button>Done</button>
-            <button>Edit</button>
-            <button>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <li>
+        <>{step.name}</>
+        <button>Done</button>
+        <button>
+          <span>✏️</span>
+        </button>
+        <button onClick={handleDeleteBtn}>
+          <span>🗑</span>
+        </button>
+      </li>
     </div>
   );
 }

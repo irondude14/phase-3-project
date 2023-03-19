@@ -31,10 +31,20 @@ function App() {
     setSteps([...steps, newStep]);
   }
 
+  function handleDeleteStep(id) {
+    const updatedSteps = steps.filter((step) => step.id !== id);
+    setSteps(updatedSteps);
+  }
+
   return (
     <div>
       <Tasks tasks={tasks} setTaskID={setTaskID} />
-      <Steps filteredSteps={filteredSteps} />
+      {filteredSteps.map((step) => (
+        <ul key={step.id}>
+          <Steps step={step} onDeleteStep={handleDeleteStep} />
+        </ul>
+      ))}
+
       <StepForm taskID={taskID} onAddStep={handleAddStep} />
     </div>
   );
