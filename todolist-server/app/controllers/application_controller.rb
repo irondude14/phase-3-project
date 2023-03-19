@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
 
   delete '/tasks/:id' do
     task = Task.find(params[:id])
-    task.destroy
+    task.step.each(&:destroy)
     task.to_json
   end
 
@@ -27,7 +27,12 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/steps' do
-    step = Step.create(name: params[:name], done: params[:done], task_id: params[:task_id])
+    step =
+      Step.create(
+        name: params[:name],
+        done: params[:done],
+        task_id: params[:task_id],
+      )
     step.to_json
   end
 
