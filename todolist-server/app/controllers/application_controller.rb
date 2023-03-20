@@ -37,9 +37,15 @@ class ApplicationController < Sinatra::Base
     step.to_json
   end
 
-  patch '/steps/:id' do
+  patch '/steps/:id/name' do
     step = Step.find(params[:id])
     step.update(name: params[:name])
+    step.to_json
+  end
+
+  patch '/steps/:id/done' do
+    step = Step.find(params[:id])
+    step.update(done: params[:done])
     step.to_json
   end
 
