@@ -41,6 +41,11 @@ function App() {
     setSteps(updatedSteps);
   }
 
+  function handleDeleteTask(id) {
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+  }
+
   function handleUpdateStep(updatedStep) {
     const updatedSteps = steps.map((step) => {
       if (step.id === updatedStep.id) {
@@ -54,7 +59,11 @@ function App() {
 
   return (
     <div>
-      <Tasks tasks={tasks} setTaskID={setTaskID} />
+      <Tasks
+        tasks={tasks}
+        setTaskID={setTaskID}
+        onDeleteTask={handleDeleteTask}
+      />
       {filteredSteps.map((step) => (
         <ul key={step.id}>
           <Step

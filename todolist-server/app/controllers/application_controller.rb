@@ -15,8 +15,9 @@ class ApplicationController < Sinatra::Base
 
   delete '/tasks/:id' do
     task = Task.find(params[:id])
-    task.step.each(&:destroy)
-    task.to_json
+    task.steps.each(&:destroy)
+    task.destroy
+    status 204
   end
 
   # Routes for Steps
