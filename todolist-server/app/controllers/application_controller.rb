@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
 
   post '/tasks' do
     task = Task.find(params[:id])
-    tasl.steps.create(name: params[:name])
+    task.steps.create(name: params[:name])
     task.to_json
   end
 
