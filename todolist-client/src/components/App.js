@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [steps, setSteps] = useState([]);
   const [taskID, setTaskID] = useState(1);
   const [filteredSteps, setFilteredSteps] = useState([]);
 
@@ -16,23 +15,17 @@ function App() {
       .then((r) => r.json())
       .then((tasks) => {
         setTasks(tasks);
-        setSteps(tasks.flatMap((task) => task.steps));
       });
   }, []);
 
-  // useEffect(() => {
-  //   fetch('http://localhost:9292/steps')
-  //     .then((r) => r.json())
-  //     .then((steps) => setSteps(steps));
-  // }, []);
-
   useEffect(() => {
-    const filteredSteps = steps.filter((step) => step.task_id === taskID);
-    setFilteredSteps(filteredSteps);
-  }, [taskID, steps]);
+    const selectTask = tasks.find((task) => task.id === taskID);
+    const selectSteps = selectTask ? selectTask.steps : [];
+    setFilteredSteps(selectSteps);
+  }, [taskID, tasks]);
 
   function handleAddStep(newStep) {
-    setSteps([...steps, newStep]);
+    setFilteredSteps([...filteredSteps, newStep]);
   }
 
   function handleAddTask(newTask) {
@@ -40,8 +33,8 @@ function App() {
   }
 
   function handleDeleteStep(id) {
-    const updatedSteps = steps.filter((step) => step.id !== id);
-    setSteps(updatedSteps);
+    const updatedSteps = filteredSteps.filter((step) => step.id !== id);
+    setFilteredSteps(updatedSteps);
   }
 
   function handleDeleteTask(id) {
@@ -50,14 +43,14 @@ function App() {
   }
 
   function handleUpdateStep(updatedStep) {
-    const updatedSteps = steps.map((step) => {
+    const updatedSteps = filteredSteps.map((step) => {
       if (step.id === updatedStep.id) {
         return updatedStep;
       } else {
         return step;
       }
     });
-    setSteps(updatedSteps);
+    setFilteredSteps(updatedSteps);
   }
 
   return (
