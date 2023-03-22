@@ -1,23 +1,39 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
 
-  # Routes for Tasks
+  ## Routes for Tasks
+
+  #Fetching Tasks and associated Steps
 
   get '/tasks' do
     tasks = Task.includes(:steps).all
     tasks.to_json(include: :steps)
   end
 
+  #Creating new Task
+
   post '/tasks' do
     task = Task.create(name: params[:name])
     task.to_json
   end
 
-  post '/tasks' do
+  #Creating new associated Step
+
+  post '/tasks/:id' do
     task = Task.find(params[:id])
     task.steps.create(name: params[:name])
     task.to_json
   end
+
+  #Changing name of the Task
+
+  patch '/tasks/:id' do
+    task = Task.find(params[:id])
+    task.update(name: params[:name])
+    task.to_json
+  end
+
+  #Deleteing Task
 
   delete '/tasks/:id' do
     task = Task.find(params[:id])
@@ -26,7 +42,7 @@ class ApplicationController < Sinatra::Base
     status 204
   end
 
-  # Routes for Steps
+  ## Routes for Steps
 
   post '/steps' do
     step =
