@@ -14,14 +14,17 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:9292/tasks')
       .then((r) => r.json())
-      .then((tasks) => setTasks(tasks));
+      .then((tasks) => {
+        setTasks(tasks);
+        setSteps(tasks.flatMap((task) => task.steps));
+      });
   }, []);
 
-  useEffect(() => {
-    fetch('http://localhost:9292/steps')
-      .then((r) => r.json())
-      .then((steps) => setSteps(steps));
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://localhost:9292/steps')
+  //     .then((r) => r.json())
+  //     .then((steps) => setSteps(steps));
+  // }, []);
 
   useEffect(() => {
     const filteredSteps = steps.filter((step) => step.task_id === taskID);
