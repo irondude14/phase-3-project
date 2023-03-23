@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
 
   #Changing name of the Task
 
-  patch '/tasks/:id/name' do
+  patch '/tasks/:id' do
     task = Task.find(params[:id])
     task.update(name: params[:name])
     task.to_json

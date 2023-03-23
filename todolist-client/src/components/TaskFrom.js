@@ -9,9 +9,13 @@ export default function TaskForm({ taskID, onAddTask, onUpdateTask }) {
     setEditTask(!editTask);
   }
 
+  console.log(updatedTaskName);
+
   function handleSubmit(e) {
     e.preventDefault();
 
+    console.log(taskID);
+    console.log(updatedTaskName);
     fetch('http://localhost:9292/tasks', {
       method: 'POST',
       headers: {
@@ -31,7 +35,7 @@ export default function TaskForm({ taskID, onAddTask, onUpdateTask }) {
   function handleSaveChanges(e) {
     e.preventDefault();
 
-    fetch(`http://localhost:9292/tasks/${taskID}/name`, {
+    fetch(`http://localhost:9292/tasks/${taskID}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -41,15 +45,18 @@ export default function TaskForm({ taskID, onAddTask, onUpdateTask }) {
       }),
     })
       .then((r) => r.json())
-      .then((updatedTask) => onUpdateTask(taskID, updatedTask));
-    setUpdatedTaskName('');
-    setEditTask(!editTask);
+      .then((updatedTask) => {
+        console.log(updatedTask);
+        onUpdateTask(taskID, updatedTask);
+        setUpdatedTaskName('');
+        setEditTask(false);
+      });
   }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label>Add a Task:</label>
+        <label>Add a Task: </label>
         <input
           type='text'
           name='name'
@@ -60,9 +67,10 @@ export default function TaskForm({ taskID, onAddTask, onUpdateTask }) {
       </form>
       {editTask ? (
         <form>
+          <label>Update the Task: </label>
           <input
             type='text'
-            name='name'
+            name='updatedName'
             value={updatedTaskName}
             onChange={(e) => setUpdatedTaskName(e.target.value)}
           />

@@ -24,7 +24,7 @@ export default function StepForm({ taskID, onAddStep }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Add a Step:</label>
+      <label>Add a Step: </label>
       <input
         type='text'
         name='name'

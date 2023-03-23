@@ -1,8 +1,5 @@
 import React from 'react';
 import Tasks from './Tasks';
-import Step from './Step';
-import StepForm from './StepFrom';
-import TaskForm from './TaskFrom';
 import StepList from './StepList';
 import { useEffect, useState } from 'react';
 
@@ -28,9 +25,6 @@ function App() {
     const selectedSteps = selectedTask ? selectedTask.steps : [];
     setSelectedSteps(selectedSteps);
   }, [taskID, tasks]);
-
-  // const selectTask = tasks.find((task) => task.id === taskID);
-  // const selectSteps = selectTask ? selectTask.steps : [];
 
   // Function to handle Tasks updates
 
@@ -68,6 +62,10 @@ function App() {
       });
       return updatedTasks;
     });
+
+    const selectedTask = tasks.find((task) => task.id === taskID);
+    const updatedSteps = selectedTask ? selectedTask.steps : [];
+    setSelectedSteps(updatedSteps);
   }
 
   function handleDeleteStep(taskID, stepID) {

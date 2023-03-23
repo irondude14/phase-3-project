@@ -18,13 +18,12 @@ export default function Tasks({
   function handleDeleteBtn(taskID) {
     fetch(`http://localhost:9292/tasks/${taskID}`, {
       method: 'DELETE',
-    });
-    onDeleteTask(taskID);
+    }).then(() => onDeleteTask(taskID));
   }
 
   return (
     <div>
-      <label>Tasks:</label>
+      <label>Tasks: </label>
       <select onChange={(e) => setTaskID(parseInt(e.target.value))}>
         {taskList}
       </select>
