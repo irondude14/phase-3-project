@@ -3,6 +3,7 @@ import Tasks from './Tasks';
 import Step from './Step';
 import StepForm from './StepFrom';
 import TaskForm from './TaskFrom';
+import StepList from './StepList';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
     setTasks(updatedTasks);
   }
 
-  function handleUpdateStep(updatedStep) {
+  function handleUpdateStep(taskID, stepID, updatedStep) {
     const updatedSteps = filteredSteps.map((step) => {
       if (step.id === updatedStep.id) {
         return updatedStep;
@@ -55,22 +56,19 @@ function App() {
 
   return (
     <div>
+      <TaskForm onAddTask={handleAddTask} />
       <Tasks
         tasks={tasks}
         setTaskID={setTaskID}
         onDeleteTask={handleDeleteTask}
       />
-      {filteredSteps.map((step) => (
-        <ul key={step.id}>
-          <Step
-            step={step}
-            onDeleteStep={handleDeleteStep}
-            onUpdateStep={handleUpdateStep}
-          />
-        </ul>
-      ))}
-      <TaskForm onAddTask={handleAddTask} />
-      <StepForm taskID={taskID} onAddStep={handleAddStep} />
+      <StepList
+        filteredSteps={filteredSteps}
+        onDeleteStep={handleDeleteStep}
+        onUpdateStep={handleUpdateStep}
+        taskID={taskID}
+        onAddStep={handleAddStep}
+      />
     </div>
   );
 }

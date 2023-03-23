@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 export default function StepForm({ taskID, onAddStep }) {
   const [stepName, setStepName] = useState('');
 
-  console.log(stepName);
-
   function handleSubmit(e) {
     e.preventDefault();
 
