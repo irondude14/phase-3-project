@@ -3,7 +3,7 @@ import Step from './Step';
 import StepForm from './StepFrom';
 
 const StepList = ({
-  selectSteps,
+  selectedSteps,
   onDeleteStep,
   onUpdateStep,
   taskID,
@@ -11,7 +11,7 @@ const StepList = ({
 }) => {
   return (
     <div>
-      {selectSteps.map((step) => (
+      {selectedSteps.map((step) => (
         <ul key={step.id}>
           <Step
             step={step}

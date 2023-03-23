@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 function App() {
   const [tasks, setTasks] = useState([]);
   const [taskID, setTaskID] = useState(1);
-  const [filteredSteps, setFilteredSteps] = useState([]);
+  const [selectedSteps, setSelectedSteps] = useState([]);
 
   // Original fetch request
 
@@ -21,16 +21,16 @@ function App() {
       });
   }, []);
 
-  useEffect(() => {
-    const selectTask = tasks.find((task) => task.id === taskID);
-    const selectSteps = selectTask ? selectTask.steps : [];
-    setFilteredSteps(selectSteps);
-  }, [taskID, tasks]);
-
   // Extracting associated Steps
 
-  const selectTask = tasks.find((task) => task.id === taskID);
-  const selectSteps = selectTask ? selectTask.steps : [];
+  useEffect(() => {
+    const selectedTask = tasks.find((task) => task.id === taskID);
+    const selectedSteps = selectedTask ? selectedTask.steps : [];
+    setSelectedSteps(selectedSteps);
+  }, [taskID, tasks]);
+
+  // const selectTask = tasks.find((task) => task.id === taskID);
+  // const selectSteps = selectTask ? selectTask.steps : [];
 
   // Function to handle Tasks updates
 
@@ -38,15 +38,16 @@ function App() {
     setTasks([...tasks, newTask]);
   }
 
-  function handleUpdateTask(updatedTask) {
-    const updatedTasks = tasks.map((task) => {
-      if (task.id === updatedTask.id) {
-        return updatedTask;
-      } else {
+  function handleUpdateTask(taskID, updatedTask) {
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.map((task) => {
+        if (task.id === taskID) {
+          return { ...updatedTask, id: taskID };
+        }
         return task;
-      }
+      });
+      return updatedTasks;
     });
-    setTasks(updatedTasks);
   }
 
   function handleDeleteTask(id) {
@@ -99,15 +100,17 @@ function App() {
 
   return (
     <div>
+      <h1>To-Do App</h1>
       <Tasks
         tasks={tasks}
+        taskID={taskID}
         setTaskID={setTaskID}
         onDeleteTask={handleDeleteTask}
         onUpdateTask={handleUpdateTask}
         onAddTask={handleAddTask}
       />
       <StepList
-        selectSteps={selectSteps}
+        selectedSteps={selectedSteps}
         onDeleteStep={handleDeleteStep}
         onUpdateStep={handleUpdateStep}
         taskID={taskID}

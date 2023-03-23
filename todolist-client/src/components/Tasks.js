@@ -1,31 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TaskForm from './TaskFrom';
 
 export default function Tasks({
   tasks,
+  taskID,
   setTaskID,
   onDeleteTask,
   onUpdateTask,
   onAddTask,
 }) {
-  const [editTask, setEditTask] = useState(false);
-  const [taskName, setTaskName] = useState();
-
   const taskList = tasks.map((task) => (
     <option key={task.id} value={task.id}>
       {task.name}
     </option>
   ));
 
-  function handleEdit() {
-    setEditTask(!editTask);
-  }
-
-  function handleDeleteBtn(taskId) {
-    fetch(`http://localhost:9292/tasks/${taskId}`, {
+  function handleDeleteBtn(taskID) {
+    fetch(`http://localhost:9292/tasks/${taskID}`, {
       method: 'DELETE',
     });
-    onDeleteTask(taskId);
+    onDeleteTask(taskID);
   }
 
   return (
@@ -34,15 +28,6 @@ export default function Tasks({
       <select onChange={(e) => setTaskID(parseInt(e.target.value))}>
         {taskList}
       </select>
-      {editTask ? (
-        <button onClick={handleEdit}>
-          <span>🚫</span>
-        </button>
-      ) : (
-        <button onClick={handleEdit}>
-          <span>📝</span>
-        </button>
-      )}
       <button
         onClick={() =>
           handleDeleteBtn(parseInt(document.querySelector('select').value))
@@ -50,7 +35,11 @@ export default function Tasks({
       >
         🗑️
       </button>
-      <TaskForm onAddTask={onAddTask} />
+      <TaskForm
+        taskID={taskID}
+        onAddTask={onAddTask}
+        onUpdateTask={onUpdateTask}
+      />
     </div>
   );
 }
