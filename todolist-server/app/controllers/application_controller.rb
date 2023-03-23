@@ -20,9 +20,9 @@ class ApplicationController < Sinatra::Base
   #Creating new associated Step
 
   post '/tasks/:id' do
-    task = Task.find(params[:id])
-    task.steps.create(name: params[:name])
-    task.to_json
+    task = Task.find_by(params[:id])
+    step = task.steps.create(name: params[:name])
+    step.to_json
   end
 
   #Changing name of the Task

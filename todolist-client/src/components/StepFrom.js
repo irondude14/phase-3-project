@@ -3,25 +3,24 @@ import React, { useState } from 'react';
 export default function StepForm({ taskID, onAddStep }) {
   const [stepName, setStepName] = useState('');
 
+  console.log(stepName);
+
   function handleSubmit(e) {
     e.preventDefault();
 
-    const newStepForm = {
-      name: stepName,
-      done: parseInt(0),
-      task_id: parseInt(taskID),
-    };
-
-    fetch('http://localhost:9292/steps', {
+    fetch(`http://localhost:9292/tasks/${taskID}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newStepForm),
+      body: JSON.stringify({
+        name: stepName,
+      }),
     })
       .then((r) => r.json())
-      .then((newStep) => {
-        onAddStep(newStep);
+      .then((data) => {
+        console.log(data);
+        onAddStep(data);
         setStepName('');
       });
   }
