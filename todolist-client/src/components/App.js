@@ -21,9 +21,9 @@ function App() {
   // Extracting associated Steps
 
   useEffect(() => {
-    const selectedTask = tasks.find((task) => task.id === taskID);
-    const selectedSteps = selectedTask ? selectedTask.steps : [];
-    setSelectedSteps(selectedSteps);
+    const pickTask = tasks.find((task) => task.id === taskID);
+    const pickSteps = pickTask ? pickTask.steps : [];
+    setSelectedSteps(pickSteps);
   }, [taskID, tasks]);
 
   // Function to handle Tasks updates

@@ -18,7 +18,8 @@ export default function Tasks({
   function handleDeleteBtn(taskID) {
     fetch(`http://localhost:9292/tasks/${taskID}`, {
       method: 'DELETE',
-    }).then(() => onDeleteTask(taskID));
+    });
+    onDeleteTask(taskID);
   }
 
   return (

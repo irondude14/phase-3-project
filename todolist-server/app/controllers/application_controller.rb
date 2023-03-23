@@ -28,7 +28,7 @@ class ApplicationController < Sinatra::Base
   #Changing name of the Task
 
   patch '/tasks/:id' do
-    task = Task.find(params[:id])
+    task = Task.find_by(params[:id])
     task.update(name: params[:name])
     task.to_json
   end
@@ -36,7 +36,7 @@ class ApplicationController < Sinatra::Base
   #Deleteing Task
 
   delete '/tasks/:id' do
-    task = Task.find(params[:id])
+    task = Task.find_by(params[:id])
     task.steps.each(&:destroy)
     task.destroy
     status 204
@@ -44,30 +44,20 @@ class ApplicationController < Sinatra::Base
 
   ## Routes for Steps
 
-  post '/steps' do
-    step =
-      Step.create(
-        name: params[:name],
-        done: params[:done],
-        task_id: params[:task_id],
-      )
-    step.to_json
-  end
-
   patch '/steps/:id/name' do
-    step = Step.find(params[:id])
+    step = Step.find_by(params[:id])
     step.update(name: params[:name])
     step.to_json
   end
 
   patch '/steps/:id/done' do
-    step = Step.find(params[:id])
+    step = Step.find_by(params[:id])
     step.update(done: params[:done])
     step.to_json
   end
 
   delete '/steps/:id' do
-    step = Step.find(params[:id])
+    step = Step.find_by(params[:id])
     step.destroy
     step.to_json
   end

@@ -9,13 +9,9 @@ export default function TaskForm({ taskID, onAddTask, onUpdateTask }) {
     setEditTask(!editTask);
   }
 
-  console.log(updatedTaskName);
-
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(taskID);
-    console.log(updatedTaskName);
     fetch('http://localhost:9292/tasks', {
       method: 'POST',
       headers: {
@@ -46,8 +42,7 @@ export default function TaskForm({ taskID, onAddTask, onUpdateTask }) {
     })
       .then((r) => r.json())
       .then((updatedTask) => {
-        console.log(updatedTask);
-        onUpdateTask(taskID, updatedTask);
+        onUpdateTask(Number(taskID), updatedTask);
         setUpdatedTaskName('');
         setEditTask(false);
       });
