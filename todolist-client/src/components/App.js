@@ -11,6 +11,8 @@ function App() {
   const [taskID, setTaskID] = useState(1);
   const [filteredSteps, setFilteredSteps] = useState([]);
 
+  // Original fetch request
+
   useEffect(() => {
     fetch('http://localhost:9292/tasks')
       .then((r) => r.json())
@@ -25,17 +27,26 @@ function App() {
     setFilteredSteps(selectSteps);
   }, [taskID, tasks]);
 
-  function handleAddStep(newStep) {
-    setFilteredSteps([...filteredSteps, newStep]);
-  }
+  // Extracting associated Steps
+
+  const selectTask = tasks.find((task) => task.id === taskID);
+  const selectSteps = selectTask ? selectTask.steps : [];
+
+  // Function to handle Tasks updates
 
   function handleAddTask(newTask) {
     setTasks([...tasks, newTask]);
   }
 
-  function handleDeleteStep(id) {
-    const updatedSteps = filteredSteps.filter((step) => step.id !== id);
-    setFilteredSteps(updatedSteps);
+  function handleUpdateTask(updatedTask) {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === updatedTask.id) {
+        return updatedTask;
+      } else {
+        return task;
+      }
+    });
+    setTasks(updatedTasks);
   }
 
   function handleDeleteTask(id) {
@@ -43,27 +54,60 @@ function App() {
     setTasks(updatedTasks);
   }
 
-  function handleUpdateStep(taskID, stepID, updatedStep) {
-    const updatedSteps = filteredSteps.map((step) => {
-      if (step.id === updatedStep.id) {
-        return updatedStep;
-      } else {
-        return step;
-      }
+  // Function to handle Steps updates
+
+  function handleAddStep(taskID, newStep) {
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.map((task) => {
+        if (task.id === taskID) {
+          const updatedSteps = [...task.steps, newStep];
+          return { ...task, steps: updatedSteps };
+        }
+        return task;
+      });
+      return updatedTasks;
     });
-    setFilteredSteps(updatedSteps);
+  }
+
+  function handleDeleteStep(taskID, stepID) {
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.map((task) => {
+        if (task.id === taskID) {
+          const updatedSteps = task.steps.filter((step) => step.id !== stepID);
+          return { ...task, steps: updatedSteps };
+        }
+        return task;
+      });
+      return updatedTasks;
+    });
+  }
+
+  function handleUpdateStep(taskID, stepID, updatedStep) {
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.map((task) => {
+        if (task.id === taskID) {
+          const updatedSteps = task.steps.map((step) =>
+            step.id === stepID ? updatedStep : step
+          );
+          return { ...task, steps: updatedSteps };
+        }
+        return task;
+      });
+      return updatedTasks;
+    });
   }
 
   return (
     <div>
-      <TaskForm onAddTask={handleAddTask} />
       <Tasks
         tasks={tasks}
         setTaskID={setTaskID}
         onDeleteTask={handleDeleteTask}
+        onUpdateTask={handleUpdateTask}
+        onAddTask={handleAddTask}
       />
       <StepList
-        filteredSteps={filteredSteps}
+        selectSteps={selectSteps}
         onDeleteStep={handleDeleteStep}
         onUpdateStep={handleUpdateStep}
         taskID={taskID}

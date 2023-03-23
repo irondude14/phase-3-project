@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Step({ step, onDeleteStep, onUpdateStep }) {
+export default function Step({ step, onDeleteStep, onUpdateStep, taskID }) {
   const [stepName, setStepName] = useState(`${step.name}`);
   const [editStep, setEditStep] = useState(false);
   const [done, setDone] = useState(false);
@@ -9,7 +9,7 @@ export default function Step({ step, onDeleteStep, onUpdateStep }) {
     fetch(`http://localhost:9292/steps/` + step.id, {
       method: 'DELETE',
     });
-    onDeleteStep(step.id);
+    onDeleteStep(taskID, step.id);
   }
 
   function handleEdit() {
@@ -29,7 +29,7 @@ export default function Step({ step, onDeleteStep, onUpdateStep }) {
       }),
     })
       .then((r) => r.json())
-      .then((updatedStep) => onUpdateStep(updatedStep));
+      .then((updatedStep) => onUpdateStep(taskID, step.id, updatedStep));
     setStepName(`${step.name}`);
     setEditStep(!editStep);
   }
@@ -43,9 +43,11 @@ export default function Step({ step, onDeleteStep, onUpdateStep }) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        done: done ? 0 : 1,
+        done: step.done ? 0 : 1,
       }),
-    });
+    })
+      .then((r) => r.json())
+      .then((updatedStep) => onUpdateStep(taskID, step.id, updatedStep));
   }
 
   return (

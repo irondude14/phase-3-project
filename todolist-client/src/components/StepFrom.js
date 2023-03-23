@@ -16,9 +16,8 @@ export default function StepForm({ taskID, onAddStep }) {
       }),
     })
       .then((r) => r.json())
-      .then((data) => {
-        console.log(data);
-        onAddStep(data);
+      .then((newStep) => {
+        onAddStep(taskID, newStep);
         setStepName('');
       });
   }
