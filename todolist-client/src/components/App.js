@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 function App() {
   const [tasks, setTasks] = useState([]);
   const [taskID, setTaskID] = useState(1);
-  const [selectedSteps, setSelectedSteps] = useState([]);
+  // const [selectedSteps, setSelectedSteps] = useState([]);
 
   // Original fetch request
 
@@ -20,11 +20,14 @@ function App() {
 
   // Extracting associated Steps
 
-  useEffect(() => {
-    const pickTask = tasks.find((task) => task.id === taskID);
-    const pickSteps = pickTask ? pickTask.steps : [];
-    setSelectedSteps(pickSteps);
-  }, [taskID, tasks]);
+  const pickTask = tasks.find((task) => task.id === taskID);
+  const selectedSteps = pickTask ? pickTask.steps : [];
+
+  // useEffect(() => {
+  //   const pickTask = tasks.find((task) => task.id === taskID);
+  //   const pickSteps = pickTask ? pickTask.steps : [];
+  //   setSelectedSteps(pickSteps);
+  // }, [taskID, tasks]);
 
   // Function to handle Tasks updates
 
@@ -63,9 +66,9 @@ function App() {
       return updatedTasks;
     });
 
-    const selectedTask = tasks.find((task) => task.id === taskID);
-    const updatedSteps = selectedTask ? selectedTask.steps : [];
-    setSelectedSteps(updatedSteps);
+    // const selectedTask = tasks.find((task) => task.id === taskID);
+    // const updatedSteps = selectedTask ? selectedTask.steps : [];
+    // setSelectedSteps(updatedSteps);
   }
 
   function handleDeleteStep(taskID, stepID) {
@@ -95,6 +98,16 @@ function App() {
       return updatedTasks;
     });
   }
+
+  // Fetch tasks after running PATCH in the back end
+
+  useEffect(() => {
+    fetch('http://localhost:9292/tasks')
+      .then((r) => r.json())
+      .then((tasks) => {
+        setTasks(tasks);
+      });
+  }, [tasks]);
 
   return (
     <div>

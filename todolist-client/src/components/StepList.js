@@ -11,16 +11,20 @@ const StepList = ({
 }) => {
   return (
     <div>
-      {selectedSteps.map((step) => (
-        <ul key={step.id}>
-          <Step
-            step={step}
-            onDeleteStep={onDeleteStep}
-            onUpdateStep={onUpdateStep}
-            taskID={taskID}
-          />
-        </ul>
-      ))}
+      {selectedSteps ? (
+        selectedSteps.map((step) => (
+          <ul key={step.id}>
+            <Step
+              step={step}
+              onDeleteStep={onDeleteStep}
+              onUpdateStep={onUpdateStep}
+              taskID={taskID}
+            />
+          </ul>
+        ))
+      ) : (
+        <div>Loading...</div>
+      )}
       <StepForm taskID={taskID} onAddStep={onAddStep} />
     </div>
   );
