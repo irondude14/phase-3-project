@@ -11,8 +11,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tasks/:id' do
-    task = Task.find(params[:id])
-    task = Task.includes(:steps).all
+    task = Task.includes(:steps).find(params[:id])
     task.to_json(include: :steps)
   end
 
@@ -26,7 +25,7 @@ class ApplicationController < Sinatra::Base
   #Creating new associated Step
 
   post '/tasks/:id' do
-    task = Task.find_by(params[:id])
+    task = Task.find(params[:id])
     step = task.steps.create(name: params[:name])
     step.to_json
   end
