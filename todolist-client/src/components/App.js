@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [taskID, setTaskID] = useState(1);
+  const [taskID, setTaskID] = useState();
 
   // Original fetch request
 
@@ -15,6 +15,7 @@ function App() {
       .then((r) => r.json())
       .then((data) => {
         setTasks(data);
+        setTaskID(data[0].id);
       });
   }, []);
 
@@ -54,7 +55,7 @@ function App() {
   function handleDeleteTask(id) {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
-    setTaskID(1);
+    setTaskID(updatedTasks[0].id);
   }
 
   // Function to handle Steps updates
