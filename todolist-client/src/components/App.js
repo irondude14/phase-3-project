@@ -54,6 +54,7 @@ function App() {
   function handleDeleteTask(id) {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
+    setTaskID(1);
   }
 
   // Function to handle Steps updates
