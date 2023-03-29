@@ -36,14 +36,15 @@ export default function Step({ step, onDeleteStep, onUpdateStep, taskID }) {
 
   function handleDoneUpdate(e) {
     e.preventDefault();
-    setDone(!done);
+    const newDone = !done;
+    setDone(newDone);
     fetch(`http://localhost:9292/steps/${step.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        done: done,
+        done: newDone,
       }),
     })
       .then((r) => r.json())
