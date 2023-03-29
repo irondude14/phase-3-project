@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 export default function Step({ step, onDeleteStep, onUpdateStep, taskID }) {
-  const [stepName, setStepName] = useState(`${step.name}`);
+  const [stepName, setStepName] = useState(step.name);
   const [editStep, setEditStep] = useState(false);
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(step.done);
 
   function handleDeleteBtn() {
     fetch(`http://localhost:9292/steps/` + step.id, {
@@ -19,7 +19,7 @@ export default function Step({ step, onDeleteStep, onUpdateStep, taskID }) {
   function handleSaveChanges(e) {
     e.preventDefault();
 
-    fetch(`http://localhost:9292/steps/${step.id}/name`, {
+    fetch(`http://localhost:9292/steps/${step.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -30,20 +30,20 @@ export default function Step({ step, onDeleteStep, onUpdateStep, taskID }) {
     })
       .then((r) => r.json())
       .then((updatedStep) => onUpdateStep(taskID, step.id, updatedStep));
-    setStepName(`${step.name}`);
+    setStepName(``);
     setEditStep(!editStep);
   }
 
-  function handleDoneUndone(e) {
+  function handleDoneUpdate(e) {
     e.preventDefault();
     setDone(!done);
-    fetch(`http://localhost:9292/steps/${step.id}/done`, {
+    fetch(`http://localhost:9292/steps/${step.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        done: step.done ? 0 : 1,
+        done: done,
       }),
     })
       .then((r) => r.json())
@@ -52,40 +52,37 @@ export default function Step({ step, onDeleteStep, onUpdateStep, taskID }) {
 
   return (
     <div>
-      <li>
-        {editStep ? (
-          <form>
-            <input
-              type='text'
-              name='name'
-              value={stepName}
-              onChange={(e) => setStepName(e.target.value)}
-            />
-            <button type='submit' onClick={handleSaveChanges}>
-              Save
-            </button>
-          </form>
-        ) : (
-          <>{step.name}</>
-        )}
-        {step.done ? (
-          <button onClick={handleDoneUndone}>Undo</button>
-        ) : (
-          <button onClick={handleDoneUndone}>Done</button>
-        )}
-        {editStep ? (
-          <button onClick={handleEdit}>
-            <span>🚫</span>
+      {editStep ? (
+        <form>
+          <input
+            type='text'
+            name='name'
+            value={stepName}
+            onChange={(e) => setStepName(e.target.value)}
+          />
+          <button type='submit' onClick={handleSaveChanges}>
+            Save
           </button>
-        ) : (
-          <button onClick={handleEdit}>
-            <span>📝</span>
-          </button>
-        )}
-        <button onClick={handleDeleteBtn}>
-          <span>🗑️</span>
+        </form>
+      ) : (
+        <>{step.name}</>
+      )}
+      <label>
+        <input type='checkbox' checked={done} onChange={handleDoneUpdate} />
+        Done
+      </label>
+      {editStep ? (
+        <button onClick={handleEdit}>
+          <span>🚫</span>
         </button>
-      </li>
+      ) : (
+        <button onClick={handleEdit}>
+          <span>📝</span>
+        </button>
+      )}
+      <button onClick={handleDeleteBtn}>
+        <span>🗑️</span>
+      </button>
     </div>
   );
 }

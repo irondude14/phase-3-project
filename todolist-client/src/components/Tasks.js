@@ -8,6 +8,7 @@ export default function Tasks({
   onDeleteTask,
   onUpdateTask,
   onAddTask,
+  selectedTaskName,
 }) {
   const taskList = tasks.map((task) => (
     <option key={task.id} value={task.id}>
@@ -39,6 +40,7 @@ export default function Tasks({
         taskID={taskID}
         onAddTask={onAddTask}
         onUpdateTask={onUpdateTask}
+        selectedTaskName={selectedTaskName}
       />
     </div>
   );

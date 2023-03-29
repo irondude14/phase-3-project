@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 
-export default function TaskForm({ taskID, onAddTask, onUpdateTask }) {
+export default function TaskForm({
+  taskID,
+  onAddTask,
+  onUpdateTask,
+  selectedTaskName,
+}) {
   const [taskName, setTaskName] = useState('');
   const [editTask, setEditTask] = useState(false);
-  const [updatedTaskName, setUpdatedTaskName] = useState('');
+  const [updatedTaskName, setUpdatedTaskName] = useState(selectedTaskName);
 
   function handleEdit() {
     setEditTask(!editTask);
