@@ -18,16 +18,13 @@ function App() {
       });
   }, []);
 
-  console.log(tasks);
-
   // Extracting associated Steps & Name of the Task
 
   const findTaskById = (id) => {
     return tasks.find((task) => task.id === id);
   };
 
-  const taskIdToFind = 1;
-  const taskToFind = findTaskById(taskIdToFind);
+  const taskToFind = findTaskById(taskID);
 
   let selectedTaskName, selectedSteps;
   if (taskToFind) {
@@ -37,9 +34,6 @@ function App() {
     selectedTaskName = '';
     selectedSteps = [];
   }
-
-  console.log(selectedTaskName);
-  console.log(selectedSteps);
 
   // Function to handle Tasks updates
 

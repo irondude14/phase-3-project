@@ -13,8 +13,7 @@ export default function TaskForm({
   function handleEdit() {
     setEditTask(!editTask);
   }
-  console.log(selectedTaskName);
-  console.log(updatedTaskName);
+
   function handleSubmit(e) {
     e.preventDefault();
 
