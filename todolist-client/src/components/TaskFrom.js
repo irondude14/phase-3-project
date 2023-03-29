@@ -8,12 +8,13 @@ export default function TaskForm({
 }) {
   const [taskName, setTaskName] = useState('');
   const [editTask, setEditTask] = useState(false);
-  const [updatedTaskName, setUpdatedTaskName] = useState(selectedTaskName);
+  const [updatedTaskName, setUpdatedTaskName] = useState('');
 
   function handleEdit() {
     setEditTask(!editTask);
   }
-
+  console.log(selectedTaskName);
+  console.log(updatedTaskName);
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -71,6 +72,7 @@ export default function TaskForm({
           <input
             type='text'
             name='updatedName'
+            placeholder={selectedTaskName}
             value={updatedTaskName}
             onChange={(e) => setUpdatedTaskName(e.target.value)}
           />

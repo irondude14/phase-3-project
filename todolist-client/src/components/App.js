@@ -41,15 +41,6 @@ function App() {
   console.log(selectedTaskName);
   console.log(selectedSteps);
 
-  // Extracting associated Steps
-
-  // let selectedTask = tasks.find((task) => task.id === 1);
-  // let selectedSteps = selectedTask ? selectedTask.steps : [];
-  // let selectedTaskName = selectedTask.name;
-  // console.log(selectedTask);
-  // console.log(selectedSteps);
-  // console.log(selectedTaskName);
-
   // Function to handle Tasks updates
 
   function handleAddTask(newTask) {
