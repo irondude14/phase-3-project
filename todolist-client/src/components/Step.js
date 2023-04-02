@@ -52,7 +52,7 @@ export default function Step({ step, onDeleteStep, onUpdateStep, taskID }) {
   }
 
   return (
-    <div class='flex pb-1 space-x-1 justify-end mr-5'>
+    <div className='flex pb-1 space-x-1 justify-end mr-5'>
       {editStep ? (
         <form>
           <input
@@ -64,36 +64,36 @@ export default function Step({ step, onDeleteStep, onUpdateStep, taskID }) {
           <button
             type='submit'
             onClick={handleSaveChanges}
-            class='bg-gray-light hover:bg-gray rounded-sm shadow-lg p-0.2 ml-1'
+            className='bg-gray-light hover:bg-gray rounded-sm shadow-lg p-0.2 ml-1'
           >
             Save
           </button>
         </form>
       ) : (
-        <ul class='flex-1'>{step.name}</ul>
+        <ul className='flex-1'>{step.name}</ul>
       )}
-      <label class='flex justify-center'>
+      <label className='flex justify-center'>
         <input type='checkbox' checked={done} onChange={handleDoneUpdate} />
         Done
       </label>
       {editStep ? (
         <button
           onClick={handleEdit}
-          class='bg-gray-light hover:bg-gray rounded-sm shadow-lg'
+          className='bg-gray-light hover:bg-gray rounded-sm shadow-lg'
         >
           <span>🚫</span>
         </button>
       ) : (
         <button
           onClick={handleEdit}
-          class='bg-gray-light hover:bg-gray rounded-sm shadow-lg'
+          className='bg-gray-light hover:bg-gray rounded-sm shadow-lg'
         >
           <span>📝</span>
         </button>
       )}
       <button
         onClick={handleDeleteBtn}
-        class='bg-gray-light hover:bg-gray rounded-sm shadow-lg'
+        className='bg-gray-light hover:bg-gray rounded-sm shadow-lg'
       >
         <span>🗑️</span>
       </button>

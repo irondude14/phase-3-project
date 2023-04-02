@@ -33,7 +33,7 @@ export default function StepForm({ taskID, onAddStep }) {
       />
       <button
         type='submit'
-        class='bg-gray-light hover:bg-gray rounded-sm shadow-lg p-0.2 pr-1 ml-2'
+        className='bg-gray-light hover:bg-gray rounded-sm shadow-lg p-0.2 pr-1 ml-2'
       >
         Submit
       </button>

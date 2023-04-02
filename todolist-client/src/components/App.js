@@ -102,28 +102,30 @@ function App() {
   }
 
   return (
-    <div class='flex flex-col p-4 max-w-sm mx-auto bg-blue rounded-xl shadow-lg space-x-3.5'>
-      <h1 class='text-xl font-medium text-black mx-auto max-w-sm'>
-        My to-do's:
-      </h1>
-      <Tasks
-        tasks={tasks}
-        taskID={taskID}
-        setTaskID={setTaskID}
-        onDeleteTask={handleDeleteTask}
-        onUpdateTask={handleUpdateTask}
-        onAddTask={handleAddTask}
-        selectedTaskName={selectedTaskName}
-      />
-      <StepList
-        selectedSteps={selectedSteps}
-        onDeleteStep={handleDeleteStep}
-        onUpdateStep={handleUpdateStep}
-        taskID={taskID}
-        onAddStep={handleAddStep}
-      />
-      <StepForm taskID={taskID} onAddStep={handleAddStep} />
-    </div>
+    <main>
+      <div className='flex flex-col p-4 max-w-sm mx-auto bg-blue rounded-xl shadow-lg space-x-3.5'>
+        <h1 className='text-xl font-medium text-black mx-auto max-w-sm'>
+          My to-do's:
+        </h1>
+        <Tasks
+          tasks={tasks}
+          taskID={taskID}
+          setTaskID={setTaskID}
+          onDeleteTask={handleDeleteTask}
+          onUpdateTask={handleUpdateTask}
+          onAddTask={handleAddTask}
+          selectedTaskName={selectedTaskName}
+        />
+        <StepList
+          selectedSteps={selectedSteps}
+          onDeleteStep={handleDeleteStep}
+          onUpdateStep={handleUpdateStep}
+          taskID={taskID}
+          onAddStep={handleAddStep}
+        />
+        <StepForm taskID={taskID} onAddStep={handleAddStep} />
+      </div>
+    </main>
   );
 }
 

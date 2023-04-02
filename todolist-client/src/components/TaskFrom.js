@@ -5,14 +5,11 @@ export default function TaskForm({
   onAddTask,
   onUpdateTask,
   selectedTaskName,
+  editTask,
+  setEditTask,
 }) {
   const [taskName, setTaskName] = useState('');
-  const [editTask, setEditTask] = useState(false);
   const [updatedTaskName, setUpdatedTaskName] = useState('');
-
-  function handleEdit() {
-    setEditTask(!editTask);
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -56,7 +53,7 @@ export default function TaskForm({
   return (
     <div>
       {editTask ? (
-        <form class='pr-3 pt-1'>
+        <form className='pr-3 pb-1'>
           <label>New Name: </label>
           <input
             type='text'
@@ -68,43 +65,28 @@ export default function TaskForm({
           <button
             type='submit'
             onClick={handleSaveChanges}
-            class='bg-gray-light hover:bg-gray rounded-sm shadow-lg p-0.2 pr-1 ml-2'
+            className='bg-gray-light hover:bg-gray rounded-sm shadow-lg p-0.2 pr-1 ml-2'
           >
             Save
           </button>
         </form>
       ) : (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='pr-3 pb-1'>
           <label>Add a Task: </label>
           <input
             type='text'
             name='name'
             value={taskName}
             onChange={(e) => setTaskName(e.target.value)}
-            class=''
+            className=''
           />
           <button
             type='submit'
-            class='bg-gray-light hover:bg-gray rounded-sm shadow-lg p-0.2 pr-1 ml-2'
+            className='bg-gray-light hover:bg-gray rounded-sm shadow-lg p-0.2 pr-1 ml-2'
           >
             Submit
           </button>
         </form>
-      )}
-      {editTask ? (
-        <button
-          onClick={handleEdit}
-          class='bg-gray-light hover:bg-gray rounded-sm shadow-lg'
-        >
-          <span>🚫</span>
-        </button>
-      ) : (
-        <button
-          onClick={handleEdit}
-          class='bg-gray-light hover:bg-gray rounded-sm shadow-lg'
-        >
-          <span>📝</span>
-        </button>
       )}
     </div>
   );
