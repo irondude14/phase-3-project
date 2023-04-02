@@ -3,7 +3,7 @@ import Step from './Step';
 
 const StepList = ({ selectedSteps, onDeleteStep, onUpdateStep, taskID }) => {
   return (
-    <div>
+    <div class='flex flex-col'>
       {selectedSteps.map((step) => (
         <Step
           key={step.id}

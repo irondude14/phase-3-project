@@ -25,17 +25,20 @@ export default function Tasks({
 
   return (
     <div>
-      <label>Tasks: </label>
-      <select onChange={(e) => setTaskID(parseInt(e.target.value))}>
-        {taskList}
-      </select>
-      <button
-        onClick={() =>
-          handleDeleteBtn(parseInt(document.querySelector('select').value))
-        }
-      >
-        🗑️
-      </button>
+      <div class='pb-1'>
+        <label>Tasks: </label>
+        <select onChange={(e) => setTaskID(parseInt(e.target.value))}>
+          {taskList}
+        </select>
+        <button
+          onClick={() =>
+            handleDeleteBtn(parseInt(document.querySelector('select').value))
+          }
+          class='bg-gray-light hover:bg-gray rounded-sm shadow-lg ml-1'
+        >
+          🗑️
+        </button>
+      </div>
       <TaskForm
         taskID={taskID}
         onAddTask={onAddTask}

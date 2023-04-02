@@ -102,8 +102,10 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>To-Do App</h1>
+    <div class='flex flex-col p-4 max-w-sm mx-auto bg-blue rounded-xl shadow-lg space-x-3.5'>
+      <h1 class='text-xl font-medium text-black mx-auto max-w-sm'>
+        My to-do's:
+      </h1>
       <Tasks
         tasks={tasks}
         taskID={taskID}

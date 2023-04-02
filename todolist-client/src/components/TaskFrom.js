@@ -55,19 +55,9 @@ export default function TaskForm({
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>Add a Task: </label>
-        <input
-          type='text'
-          name='name'
-          value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
-        />
-        <button type='submit'>Submit</button>
-      </form>
       {editTask ? (
-        <form>
-          <label>Update the Task: </label>
+        <form class='pr-3 pt-1'>
+          <label>New Name: </label>
           <input
             type='text'
             name='updatedName'
@@ -75,17 +65,44 @@ export default function TaskForm({
             value={updatedTaskName}
             onChange={(e) => setUpdatedTaskName(e.target.value)}
           />
-          <button type='submit' onClick={handleSaveChanges}>
+          <button
+            type='submit'
+            onClick={handleSaveChanges}
+            class='bg-gray-light hover:bg-gray rounded-sm shadow-lg p-0.2 pr-1 ml-2'
+          >
             Save
           </button>
         </form>
-      ) : null}
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <label>Add a Task: </label>
+          <input
+            type='text'
+            name='name'
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
+            class=''
+          />
+          <button
+            type='submit'
+            class='bg-gray-light hover:bg-gray rounded-sm shadow-lg p-0.2 pr-1 ml-2'
+          >
+            Submit
+          </button>
+        </form>
+      )}
       {editTask ? (
-        <button onClick={handleEdit}>
+        <button
+          onClick={handleEdit}
+          class='bg-gray-light hover:bg-gray rounded-sm shadow-lg'
+        >
           <span>🚫</span>
         </button>
       ) : (
-        <button onClick={handleEdit}>
+        <button
+          onClick={handleEdit}
+          class='bg-gray-light hover:bg-gray rounded-sm shadow-lg'
+        >
           <span>📝</span>
         </button>
       )}

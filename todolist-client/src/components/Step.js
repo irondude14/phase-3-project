@@ -52,7 +52,7 @@ export default function Step({ step, onDeleteStep, onUpdateStep, taskID }) {
   }
 
   return (
-    <div>
+    <div class='flex pb-1 space-x-1 justify-end mr-5'>
       {editStep ? (
         <form>
           <input
@@ -61,27 +61,40 @@ export default function Step({ step, onDeleteStep, onUpdateStep, taskID }) {
             value={stepName}
             onChange={(e) => setStepName(e.target.value)}
           />
-          <button type='submit' onClick={handleSaveChanges}>
+          <button
+            type='submit'
+            onClick={handleSaveChanges}
+            class='bg-gray-light hover:bg-gray rounded-sm shadow-lg p-0.2 ml-1'
+          >
             Save
           </button>
         </form>
       ) : (
-        <>{step.name}</>
+        <ul class='flex-1'>{step.name}</ul>
       )}
-      <label>
+      <label class='flex justify-center'>
         <input type='checkbox' checked={done} onChange={handleDoneUpdate} />
         Done
       </label>
       {editStep ? (
-        <button onClick={handleEdit}>
+        <button
+          onClick={handleEdit}
+          class='bg-gray-light hover:bg-gray rounded-sm shadow-lg'
+        >
           <span>🚫</span>
         </button>
       ) : (
-        <button onClick={handleEdit}>
+        <button
+          onClick={handleEdit}
+          class='bg-gray-light hover:bg-gray rounded-sm shadow-lg'
+        >
           <span>📝</span>
         </button>
       )}
-      <button onClick={handleDeleteBtn}>
+      <button
+        onClick={handleDeleteBtn}
+        class='bg-gray-light hover:bg-gray rounded-sm shadow-lg'
+      >
         <span>🗑️</span>
       </button>
     </div>
