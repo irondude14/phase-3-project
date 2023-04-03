@@ -64,7 +64,9 @@ function App() {
     setTasks((prevTasks) => {
       const updatedTasks = prevTasks.map((task) => {
         if (task.id === taskID) {
-          const updatedSteps = [...task.steps, newStep];
+          const updatedSteps = task.steps
+            ? [...task.steps, newStep]
+            : [newStep];
           return { ...task, steps: updatedSteps };
         }
         return task;
@@ -102,7 +104,7 @@ function App() {
   }
 
   return (
-    <main>
+    <main className='pt-4'>
       <div className='flex flex-col p-4 max-w-sm mx-auto bg-blue rounded-xl shadow-lg space-x-3.5'>
         <h1 className='text-xl font-medium text-black mx-auto max-w-sm'>
           My to-do's:
