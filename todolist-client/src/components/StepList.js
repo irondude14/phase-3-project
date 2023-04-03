@@ -15,7 +15,7 @@ const StepList = ({ selectedSteps, onDeleteStep, onUpdateStep, taskID }) => {
           />
         ))
       ) : (
-        <div></div>
+        <div>Your steps here.</div>
       )}
     </div>
   );
