@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function TaskForm({
   taskID,
@@ -9,7 +9,13 @@ export default function TaskForm({
   setEditTask,
 }) {
   const [taskName, setTaskName] = useState('');
-  const [updatedTaskName, setUpdatedTaskName] = useState('');
+  const [updatedTaskName, setUpdatedTaskName] = useState(
+    selectedTaskName || ''
+  );
+
+  useEffect(() => {
+    setUpdatedTaskName(selectedTaskName);
+  }, [selectedTaskName]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -58,7 +64,6 @@ export default function TaskForm({
           <input
             type='text'
             name='updatedName'
-            placeholder={selectedTaskName}
             value={updatedTaskName}
             onChange={(e) => setUpdatedTaskName(e.target.value)}
           />
